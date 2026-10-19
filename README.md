@@ -117,6 +117,7 @@ apphotoassistant/
         ├── App.vue              # root shell — mounts the router view
         ├── router/              # route definitions (project selector ↔ app)
         ├── assets/              # global styles
+        ├── config/              # global config, content & test data
         ├── components/          # common components (shared by outer + app)
         ├── views/               # outer pages: projects, import, help, 404
         └── app/                 # the loaded-project app (encapsulated instance)
