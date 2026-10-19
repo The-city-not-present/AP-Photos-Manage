@@ -1,6 +1,6 @@
 <script setup>
 import { computed, reactive, ref, watch } from 'vue'
-import { compareValues, matchValue } from './matchers.js'
+import { compareValues, matchesRecord } from './matchers.js'
 
 const props = defineProps({
   columns: { type: Object, required: true },
@@ -38,9 +38,11 @@ const perPage = computed(() => {
 })
 
 function recordMatches(record) {
-  return Object.keys(columnsSanitized.value).every((key) =>
-    matchValue(record[key], filters[key], columnsSanitized.value[key].type)
-  )
+  return matchesRecord(record, filters, columnsSanitized.value)
+}
+
+function isRangeType(type) {
+  return type === 'number' || type === 'date' || type === 'datetime'
 }
 
 const matchedCount = computed(() => props.records.filter((record) => recordMatches(record)).length)
@@ -124,7 +126,15 @@ const view = computed(() => {
       <div class="apph-records-filter-fields">
         <label v-for="(def, key) in columnsSanitized" :key="key" class="apph-records-filter-field">
           <span class="apph-records-filter-field-label">{{ def.label }}</span>
+          <apph-range-input
+            v-if="isRangeType(def.type)"
+            v-model="filters[key]"
+            :kind="def.type"
+            :name="'filter-' + key"
+            :placeholder="'Filter ' + def.label.toLowerCase() + '…'"
+          />
           <input
+            v-else
             v-model="filters[key]"
             type="text"
             :name="'filter-' + key"

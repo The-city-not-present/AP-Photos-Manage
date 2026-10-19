@@ -2,6 +2,7 @@
 import AppHeader from '../components/AppHeader.vue'
 import AppNav from '../components/AppNav.vue'
 import BackendStatus from '../components/BackendStatus.vue'
+import ErrorBoundary from '../components/ErrorBoundary.vue'
 
 const navLinks = [
   { label: 'Projects', to: { name: 'welcome' } },
@@ -18,7 +19,9 @@ const navLinks = [
     <AppNav :links="navLinks" />
 
     <main class="apph-outer-layout-main">
-      <RouterView />
+      <ErrorBoundary>
+        <RouterView />
+      </ErrorBoundary>
     </main>
 
     <footer class="apph-outer-layout-footer">

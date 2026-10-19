@@ -13,13 +13,13 @@ const columns = {
   name: 'Name',
   description: 'Description',
   place: 'Place',
-  eventDate: 'Date',
+  eventDate: { label: 'Date', type: 'date' },
   tags: 'Tags',
   color: 'Color',
   backupPaths: 'Backup paths',
-  createdAt: 'Created',
-  devStartedAt: 'Started',
-  releasedAt: 'Released',
+  createdAt: { label: 'Created', type: 'date' },
+  devStartedAt: { label: 'Started', type: 'date' },
+  releasedAt: { label: 'Released', type: 'date' },
 }
 </script>
 

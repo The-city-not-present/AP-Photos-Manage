@@ -37,7 +37,7 @@ export function matchDatetimeRange(fieldValue, matchValue) {
 
 export function matchValue(fieldValue, matchValue, type = 'text') {
   if (type === 'number') return matchNumericRange(fieldValue, matchValue)
-  if (type === 'datetime') return matchDatetimeRange(fieldValue, matchValue)
+  if (type === 'date' || type === 'datetime') return matchDatetimeRange(fieldValue, matchValue)
   return matchText(fieldValue, matchValue)
 }
 
@@ -48,7 +48,7 @@ export function compareValues(a, b, type = 'text', ascending = true) {
     const nb = Number.isFinite(Number(b)) ? Number(b) : 0
     return (na - nb) * dir
   }
-  if (type === 'datetime') {
+  if (type === 'date' || type === 'datetime') {
     const ta = new Date(a).getTime()
     const tb = new Date(b).getTime()
     const na = Number.isFinite(ta) ? ta : 0
@@ -56,4 +56,10 @@ export function compareValues(a, b, type = 'text', ascending = true) {
     return (na - nb) * dir
   }
   return toText(a).localeCompare(toText(b)) * dir
+}
+
+export function matchesRecord(record, filters, columns) {
+  return Object.keys(columns).every((key) =>
+    matchValue(record[key], filters[key], columns[key]?.type || 'text')
+  )
 }

@@ -5,6 +5,7 @@ import { useRouter } from 'vue-router'
 // The encapsulated app can still use common components from the outer root.
 import AppHeader from '../components/AppHeader.vue'
 import AppNav from '../components/AppNav.vue'
+import ErrorBoundary from '../components/ErrorBoundary.vue'
 
 const props = defineProps({
   projectId: { type: String, required: true },
@@ -62,7 +63,9 @@ watch(() => props.projectId, loadProject)
 
     <main class="apph-project-app-main">
       <p v-if="loading" class="apph-project-app-loading">Opening project…</p>
-      <RouterView v-else />
+      <ErrorBoundary v-else>
+        <RouterView />
+      </ErrorBoundary>
     </main>
   </div>
 </template>

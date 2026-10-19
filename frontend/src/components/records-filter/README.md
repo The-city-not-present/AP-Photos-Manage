@@ -23,7 +23,8 @@ collected).
 Props:
 
 - `columns` (object) — `{ key: label | { label, type } }`. One filter box per
-  key. `type` is `'text' | 'number' | 'datetime'` (default `text`).
+  key. `type` is `'text' | 'number' | 'date' | 'datetime'` (default `text`).
+  Non-text types render a range input (popup with from/to).
 - `records` (array) — the source records.
 - `keyField` (string) — unique key used to track per-record filter state.
 - `needSort` (boolean) — enable the sort controls.

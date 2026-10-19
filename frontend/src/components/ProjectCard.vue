@@ -23,13 +23,6 @@ const colorHex = {
 }
 
 const swatch = computed(() => colorHex[props.project.color] || '#888888')
-
-function formatDate(value) {
-  if (!value) return ''
-  const date = new Date(value)
-  if (Number.isNaN(date.getTime())) return value
-  return date.toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' })
-}
 </script>
 
 <template>
@@ -45,7 +38,7 @@ function formatDate(value) {
         </RouterLink>
       </h3>
       <p class="apph-project-card-summary">
-        {{ formatDate(project.eventDate) }} · {{ project.place }} · {{ project.tags.length }} tags
+        <apph-format-datetime :dt="project.eventDate" date-only /> · {{ project.place }} · {{ project.tags.length }} tags
       </p>
       <RouterLink
         class="apph-btn apph-project-card-open"
@@ -67,7 +60,7 @@ function formatDate(value) {
         </div>
         <div v-if="project.eventDate">
           <dt>Date</dt>
-          <dd>{{ formatDate(project.eventDate) }}</dd>
+          <dd><apph-format-datetime :dt="project.eventDate" date-only /></dd>
         </div>
         <div v-if="project.tags.length">
           <dt>Tags</dt>
@@ -87,15 +80,15 @@ function formatDate(value) {
         </div>
         <div v-if="project.createdAt">
           <dt>Created</dt>
-          <dd>{{ formatDate(project.createdAt) }}</dd>
+          <dd><apph-format-datetime :dt="project.createdAt" /></dd>
         </div>
         <div v-if="project.devStartedAt">
           <dt>Started</dt>
-          <dd>{{ formatDate(project.devStartedAt) }}</dd>
+          <dd><apph-format-datetime :dt="project.devStartedAt" /></dd>
         </div>
         <div v-if="project.releasedAt">
           <dt>Released</dt>
-          <dd>{{ formatDate(project.releasedAt) }}</dd>
+          <dd><apph-format-datetime :dt="project.releasedAt" /></dd>
         </div>
       </dl>
     </div>
