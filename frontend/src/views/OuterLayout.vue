@@ -5,7 +5,6 @@ import BackendStatus from '../components/BackendStatus.vue'
 
 const navLinks = [
   { label: 'Projects', to: { name: 'welcome' } },
-  { label: 'Import photos', to: { name: 'import' } },
   { label: 'Help', to: { name: 'help' } },
 ]
 </script>

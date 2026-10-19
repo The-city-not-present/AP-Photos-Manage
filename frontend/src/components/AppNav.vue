@@ -11,7 +11,7 @@ defineProps({
       :key="link.label"
       :to="link.to"
       class="apph-app-nav-link"
-      active-class="is-active"
+      exact-active-class="is-active"
     >
       {{ link.label }}
     </RouterLink>
