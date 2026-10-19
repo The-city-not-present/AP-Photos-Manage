@@ -1,0 +1,10 @@
+# Web framework & server
+fastapi>=0.115
+uvicorn[standard]>=0.32
+
+# --- Added as needed in later milestones ---
+# pillow>=11             # image decode + thumbnail generation
+# piexif>=1.1            # EXIF read/write
+# pyexiftool>=0.5        # full EXIF/IPTC/XMP (wraps the exiftool binary)
+# numpy>=2               # face-embedding math
+# onnxruntime>=1.20      # face detection / embedding models

@@ -1,0 +1,429 @@
+/* =====================================================================
+   common.css — global, reusable styles (the "skin")
+
+   Load order:
+     1. normalize.css
+     2. common.css            (this file)
+     3. per-component styles  (Vue <style scoped>)
+
+   Modular spacing scale (base unit = 30px):
+     3x    = 90px   (--apph-space-3x)
+     2x    = 60px   (--apph-space-2x)
+     1.5x  = 45px   (--apph-space-1-5x)
+     1x    = 30px   (--apph-space)
+     0.75x = 22.5px (--apph-space-0-75x)
+     0.5x  = 15px   (--apph-space-0-5x)
+     0.25x = 7.5px  (--apph-space-0-25x)
+     0.125x= 3.75px (--apph-space-0-125x)
+
+   Naming:
+     apph-*     reusable domains (buttons, links, forms, tables, utilities)
+     unprefixed a few truly-global layout blocks (.container, .header, ...)
+   ===================================================================== */
+
+/* Modular scale + shared tokens */
+:root {
+    --apph-space-3x: 90px;
+    --apph-space-2x: 60px;
+    --apph-space-1-5x: 45px;
+    --apph-space: 30px;
+    --apph-space-0-75x: 22.5px;
+    --apph-space-0-5x: 15px;
+    --apph-space-0-25x: 7.5px;
+    --apph-space-0-125x: 3.75px;
+
+    --apph-border-color: #d0d0d0;
+    --apph-border-color-dark: #444;
+    --apph-border-radius: 4px;
+    --apph-transition: 350ms ease;
+
+    --apph-color-primary: #6670bb;
+    --apph-color-confirm: #2c7d51;
+    --apph-color-reject: #c0392b;
+    --apph-color-muted: #666;
+    --apph-color-error: #cc0000;
+
+    --apph-color-link: #6c78ff;
+    --apph-color-link-hover: #4d56cc;
+    --apph-color-green: #385;
+    --apph-color-green-hover: #217346;
+    --apph-color-blue: #5b9bd5;
+    --apph-color-blue-hover: #2f6fa8;
+
+    --apph-color-bg: #f5f6f8;
+    --apph-color-surface: #ffffff;
+    --apph-color-text: #1f2328;
+}
+
+/* Base */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+body {
+    font-size: 14px;
+    font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.5;
+    color: var(--apph-color-text);
+    background: var(--apph-color-bg);
+}
+
+.clearfix::after,
+.apph-u-clearfix::after {
+    content: "";
+    display: block;
+    clear: both;
+}
+
+/* Layout (truly-global blocks) */
+.container {
+    margin: 0 var(--apph-space-0-5x);
+}
+@media (min-width: 500px) {
+    .container { margin: 0 var(--apph-space); }
+}
+@media (min-width: 750px) {
+    .container { margin: 0 var(--apph-space-1-5x); }
+}
+@media (min-width: 1300px) {
+    .container { margin: 0 auto; width: 1200px; }
+}
+@media (min-width: 1650px) {
+    .container { margin: 0 auto; width: 1500px; }
+}
+@media (min-width: 1800px) {
+    .container { margin: 0 auto; width: 1700px; }
+}
+
+.header {
+    padding: var(--apph-space-0-5x) 0;
+    border-bottom: 1px solid #eee;
+}
+.footer {
+    padding: var(--apph-space-0-5x) 0;
+    border-top: 1px solid #eee;
+}
+.main {
+    padding: var(--apph-space-0-5x) 0;
+}
+.wrapper {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: auto;
+}
+.section {
+    margin-bottom: var(--apph-space);
+}
+
+/* Typography */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    margin: 0 0 0.6em;
+    font-weight: 700;
+}
+h1 { font-size: 32px; color: #333; }
+h2 { font-size: 21px; color: #222; }
+h3 { font-size: 17px; color: #111; }
+p { margin: 0 0 1em; }
+ul,
+ol {
+    margin: 0 0 1em;
+    padding: 0 0 0 40px;
+}
+ul > li,
+ol > li {
+    padding: 2px 0;
+}
+code {
+    background: #eef1f5;
+    padding: 0.1em 0.35em;
+    border-radius: var(--apph-border-radius);
+    font-family: monospace, monospace;
+    font-size: 0.9em;
+}
+
+/* Page scaffolding (shared across views) */
+.apph-page-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--apph-space-0-5x);
+    margin-bottom: var(--apph-space-0-5x);
+}
+.apph-page-lede {
+    color: var(--apph-color-muted);
+}
+
+/* Links */
+.apph-link,
+.apph-link-green,
+.apph-link-blue,
+.apph-link-red,
+.apph-link-muted {
+    outline: none;
+    text-decoration: none;
+    transition: color var(--apph-transition);
+}
+.apph-link { color: var(--apph-color-link); }
+.apph-link:hover,
+.apph-link:focus {
+    color: var(--apph-color-link-hover);
+    outline: none;
+}
+.apph-link-green { color: var(--apph-color-green); }
+.apph-link-green:hover,
+.apph-link-green:focus { color: var(--apph-color-green-hover); }
+.apph-link-blue { color: var(--apph-color-blue); }
+.apph-link-blue:hover,
+.apph-link-blue:focus { color: var(--apph-color-blue-hover); }
+.apph-link-red { color: var(--apph-color-reject); }
+.apph-link-red:hover,
+.apph-link-red:focus { color: #96281b; }
+.apph-link-muted { color: var(--apph-color-muted); }
+.apph-link-muted:hover,
+.apph-link-muted:focus { color: #333; }
+
+.apph-link-unstyled,
+.apph-link-unstyled:link,
+.apph-link-unstyled:visited {
+    color: inherit;
+    text-decoration: none;
+    outline: none;
+    border: none;
+    cursor: pointer;
+    transition: color var(--apph-transition);
+}
+.apph-link-unstyled:hover { text-decoration: underline; }
+
+.apph-link-underline {
+    color: inherit;
+    text-decoration: underline;
+    outline: none;
+    transition: color var(--apph-transition);
+}
+
+/* Buttons */
+.apph-btn {
+    display: inline-block;
+    vertical-align: middle;
+    text-align: center;
+    white-space: nowrap;
+    cursor: pointer;
+    user-select: none;
+    box-sizing: border-box;
+    margin: 0;
+    border: 1px solid var(--apph-border-color);
+    border-radius: var(--apph-border-radius);
+    background: #fff;
+    color: #333;
+    font: inherit;
+    line-height: 1.2;
+    padding: 0.35em 0.8em;
+    text-decoration: none;
+    transition: border-color var(--apph-transition), background var(--apph-transition);
+}
+.apph-btn:hover,
+.apph-btn:focus {
+    border-color: var(--apph-border-color-dark);
+    outline: none;
+}
+.apph-btn:active { background: #f2f2f2; }
+
+.apph-btn-primary {
+    background: var(--apph-color-primary);
+    border-color: var(--apph-color-primary);
+    color: #fff;
+}
+.apph-btn-primary:hover,
+.apph-btn-primary:focus {
+    background: #5560a8;
+    border-color: #5560a8;
+    color: #fff;
+}
+
+.apph-btn-secondary { background: transparent; }
+
+.apph-btn-confirm {
+    background: var(--apph-color-confirm);
+    border-color: var(--apph-color-confirm);
+    color: #fff;
+}
+.apph-btn-confirm:hover,
+.apph-btn-confirm:focus {
+    background: #1f5f3d;
+    border-color: #1f5f3d;
+    color: #fff;
+}
+
+.apph-btn-reject {
+    background: var(--apph-color-reject);
+    border-color: var(--apph-color-reject);
+    color: #fff;
+}
+.apph-btn-reject:hover,
+.apph-btn-reject:focus {
+    background: #a32c22;
+    border-color: #a32c22;
+    color: #fff;
+}
+
+.apph-btn-close {
+    background: transparent;
+    color: var(--apph-color-muted);
+}
+
+.apph-btn-large {
+    padding: 0.6em 1.4em;
+    font-size: 16px;
+}
+
+.apph-btn-block {
+    display: block;
+    width: 100%;
+}
+
+.apph-btn-link {
+    background: none;
+    border: none;
+    padding: 0;
+    color: var(--apph-color-primary);
+    font: inherit;
+    line-height: inherit;
+    text-align: left;
+    cursor: pointer;
+    text-decoration: none;
+}
+.apph-btn-link:hover {
+    color: #385;
+    text-decoration: underline;
+}
+
+.apph-btn-unstyled {
+    background: none;
+    border: none;
+    padding: 0;
+    margin: 0;
+    color: inherit;
+    font: inherit;
+    line-height: inherit;
+    text-align: left;
+    cursor: pointer;
+    box-shadow: none;
+}
+.apph-btn-unstyled:hover { text-decoration: underline; }
+
+/* Form controls */
+.apph-form-controls { position: relative; }
+.apph-form-controls form,
+form.apph-form-controls,
+.apph-form-controls fieldset,
+fieldset.apph-form-controls {
+    display: block;
+    margin: 0;
+    padding: 0;
+    border: none;
+}
+.apph-form-controls label,
+.apph-form-label {
+    display: inline-block;
+    vertical-align: middle;
+    line-height: 1.5;
+    padding: var(--apph-space-0-25x);
+}
+.apph-form-control,
+.apph-form-controls input,
+.apph-form-controls select,
+.apph-form-controls textarea,
+.apph-form-controls button {
+    box-sizing: border-box;
+    display: inline-block;
+    vertical-align: middle;
+    margin: 0;
+    padding: 0.35em 0.65em;
+    border: 1px solid var(--apph-border-color);
+    border-radius: var(--apph-border-radius);
+    background: #fff;
+    color: #333;
+    font: inherit;
+    line-height: 1.2;
+    box-shadow: none;
+    outline: none;
+    transition: border-color var(--apph-transition), background var(--apph-transition);
+}
+.apph-form-control,
+.apph-form-controls input,
+.apph-form-controls textarea,
+.apph-form-controls button {
+    appearance: none;
+    -webkit-appearance: none;
+}
+.apph-form-control:hover,
+.apph-form-control:focus,
+.apph-form-controls input:hover,
+.apph-form-controls input:focus,
+.apph-form-controls select:hover,
+.apph-form-controls select:focus,
+.apph-form-controls textarea:hover,
+.apph-form-controls textarea:focus,
+.apph-form-controls button:hover,
+.apph-form-controls button:focus {
+    border-color: var(--apph-border-color-dark);
+}
+select,
+.apph-form-controls input[type="checkbox"],
+.apph-form-controls input[type="radio"] {
+    cursor: pointer;
+}
+.apph-form-controls textarea {
+    resize: vertical;
+    min-height: var(--apph-space-2x);
+}
+
+/* Table */
+.apph-table {
+    border-collapse: collapse;
+    width: 100%;
+}
+.apph-table th,
+.apph-table td {
+    padding: var(--apph-space-0-25x) var(--apph-space-0-5x);
+    border: 1px solid var(--apph-border-color);
+    text-align: left;
+    vertical-align: top;
+}
+
+/* Notice (callout) */
+.apph-notice {
+    padding: var(--apph-space-0-5x) var(--apph-space);
+    border: 1px solid #fde68a;
+    border-radius: var(--apph-border-radius);
+    background: #fefce8;
+    color: #854d0e;
+}
+
+/* Utilities */
+.apph-u-hidden { display: none; }
+.apph-u-text-error {
+    color: var(--apph-color-error);
+    font-weight: 500;
+}
+.apph-u-text-muted { color: var(--apph-color-muted); }
+.apph-u-nowrap { white-space: nowrap; }
+.apph-u-pre { white-space: pre; }
+.apph-u-sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
