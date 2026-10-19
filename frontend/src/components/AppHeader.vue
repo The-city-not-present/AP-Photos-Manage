@@ -2,11 +2,12 @@
 defineProps({
   title: { type: String, required: true },
   subtitle: { type: String, default: '' },
+  visuallyHidden: { type: Boolean, default: false },
 })
 </script>
 
 <template>
-  <header class="apph-app-header">
+  <header class="apph-app-header" :class="{ 'apph-app-header--visually-hidden': visuallyHidden }">
     <div>
       <h1 class="apph-app-header-title">{{ title }}</h1>
       <p v-if="subtitle" class="apph-app-header-subtitle">{{ subtitle }}</p>
@@ -44,5 +45,17 @@ defineProps({
   display: flex;
   align-items: center;
   gap: var(--apph-space-0-25x);
+}
+
+.apph-app-header--visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 </style>

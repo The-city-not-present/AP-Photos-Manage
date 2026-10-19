@@ -129,11 +129,12 @@ function cancel() {
 
 <style scoped>
 .apph-range-input {
-  display: inline-block;
+  display: block;
+  width: 100%;
 }
 
 .apph-range-input-field {
-  width: 180px;
+  width: 100%;
   cursor: pointer;
 }
 

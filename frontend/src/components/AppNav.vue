@@ -6,25 +6,31 @@ defineProps({
 
 <template>
   <nav class="apph-app-nav">
-    <RouterLink
-      v-for="link in links"
-      :key="link.label"
-      :to="link.to"
-      class="apph-app-nav-link"
-      exact-active-class="is-active"
-    >
-      {{ link.label }}
-    </RouterLink>
+    <div class="container apph-app-nav-inner">
+      <RouterLink
+        v-for="link in links"
+        :key="link.label"
+        :to="link.to"
+        class="apph-app-nav-link"
+        exact-active-class="is-active"
+      >
+        {{ link.label }}
+      </RouterLink>
+    </div>
   </nav>
 </template>
 
 <style scoped>
 .apph-app-nav {
-  display: flex;
-  gap: var(--apph-space-0-125x);
-  padding: var(--apph-space-0-25x) var(--apph-space);
   background: var(--apph-color-surface);
   border-bottom: 1px solid var(--apph-border-color);
+}
+
+.apph-app-nav-inner {
+  display: flex;
+  gap: var(--apph-space-0-125x);
+  padding-top: var(--apph-space-0-25x);
+  padding-bottom: var(--apph-space-0-25x);
   overflow-x: auto;
 }
 

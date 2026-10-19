@@ -15,6 +15,7 @@ const navLinks = [
     <AppHeader
       title="App Photo Assistant"
       subtitle="Manage and sort your photo library"
+      visually-hidden
     />
     <AppNav :links="navLinks" />
 

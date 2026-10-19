@@ -181,6 +181,7 @@ const view = computed(() => {
 
 <style scoped>
 .apph-records-filter {
+  container-type: inline-size;
   display: flex;
   flex-direction: column;
   gap: var(--apph-space-0-5x);
@@ -189,13 +190,17 @@ const view = computed(() => {
 .apph-records-filter-fields {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--apph-space-0-5x) var(--apph-space-0-75x);
+  gap: var(--apph-space-0-25x) var(--apph-space-0-5x);
 }
 
 .apph-records-filter-field {
   display: flex;
   flex-direction: column;
   gap: var(--apph-space-0-125x);
+  min-width: 0;
+  /* Fixed box width: on wide containers boxes flow naturally and wrap,
+     leaving a ragged right edge instead of stretching to fill. */
+  flex: 0 0 200px;
 }
 
 .apph-records-filter-field-label {
@@ -205,7 +210,28 @@ const view = computed(() => {
 }
 
 .apph-records-filter-field input {
-  width: 180px;
+  width: 100%;
+}
+
+/* ~3 boxes fit → 33% each (fills the row, aligned to the right edge). */
+@container (max-width: 840px) {
+  .apph-records-filter-field {
+    flex: 1 1 calc(33.333% - 10px);
+  }
+}
+
+/* ~2 boxes fit → 50% each. */
+@container (max-width: 620px) {
+  .apph-records-filter-field {
+    flex: 1 1 calc(50% - 7.5px);
+  }
+}
+
+/* Not even 2 boxes fit → full width. */
+@container (max-width: 420px) {
+  .apph-records-filter-field {
+    flex: 1 1 100%;
+  }
 }
 
 .apph-records-filter-toolbar {

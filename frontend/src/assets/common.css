@@ -37,14 +37,14 @@
     --apph-border-radius: 4px;
     --apph-transition: 350ms ease;
 
-    --apph-color-primary: #6670bb;
+    --apph-color-primary: #385;
     --apph-color-confirm: #2c7d51;
     --apph-color-reject: #c0392b;
     --apph-color-muted: #666;
     --apph-color-error: #cc0000;
 
-    --apph-color-link: #6c78ff;
-    --apph-color-link-hover: #4d56cc;
+    --apph-color-link: #385;
+    --apph-color-link-hover: #217346;
     --apph-color-green: #385;
     --apph-color-green-hover: #217346;
     --apph-color-blue: #5b9bd5;
@@ -242,8 +242,8 @@ code {
 }
 .apph-btn-primary:hover,
 .apph-btn-primary:focus {
-    background: #5560a8;
-    border-color: #5560a8;
+    background: #217346;
+    border-color: #217346;
     color: #fff;
 }
 
