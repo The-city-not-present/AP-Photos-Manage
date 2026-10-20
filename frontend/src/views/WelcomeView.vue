@@ -4,7 +4,7 @@ import EmptyState from '../components/EmptyState.vue'
 import RecordsFilter from '../components/records-filter/RecordsFilter.vue'
 import ProjectCard from '../components/ProjectCard.vue'
 import CreateProjectDialog from '../components/import/CreateProjectDialog.vue'
-import { listProjects } from '../services/api.js'
+import { deleteProject, listProjects } from '../services/api.js'
 import { reportError } from '../services/errors.js'
 
 const projects = ref([])
@@ -40,6 +40,15 @@ function closeDialog() {
 async function handleCreated() {
   closeDialog()
   await loadProjects()
+}
+
+async function handleDelete(project) {
+  try {
+    await deleteProject(project.id)
+    await loadProjects()
+  } catch (err) {
+    reportError(err)
+  }
 }
 
 onMounted(loadProjects)
@@ -82,7 +91,7 @@ onMounted(loadProjects)
           :key="project.id"
           :class="project._filterMeta?.cssClasses"
         >
-          <ProjectCard :project="project" />
+          <ProjectCard :project="project" @delete="handleDelete" />
         </li>
       </ul>
     </RecordsFilter>
@@ -130,4 +139,5 @@ onMounted(loadProjects)
   outline: none;
 }
 </style>
+
 

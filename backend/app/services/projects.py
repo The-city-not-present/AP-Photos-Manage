@@ -41,3 +41,6 @@ class ProjectService:
 
     def get(self, project_id: str) -> dict | None:
         return self.repository.get(project_id)
+
+    def delete(self, project_id: str) -> bool:
+        return self.repository.delete(project_id)

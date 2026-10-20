@@ -48,3 +48,9 @@ def get_project(project_id: str, service: ProjectService = Depends(get_service))
     if project is None:
         raise HTTPException(status_code=404, detail="project not found")
     return project
+
+
+@router.delete("/{project_id}", status_code=204)
+def delete_project(project_id: str, service: ProjectService = Depends(get_service)):
+    if not service.delete(project_id):
+        raise HTTPException(status_code=404, detail="project not found")

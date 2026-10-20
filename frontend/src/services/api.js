@@ -19,6 +19,7 @@ async function request(path, { method = 'GET', body, headers = {} } = {}) {
     throw new Error(detail || `Request failed with status ${response.status}`)
   }
 
+  if (response.status === 204) return null
   return response.json()
 }
 
@@ -33,9 +34,14 @@ export function createProject(payload) {
   })
 }
 
+export function deleteProject(id) {
+  return request(`/api/projects/${encodeURIComponent(id)}`, { method: 'DELETE' })
+}
+
 export function scanFolder(path) {
   return request('/api/folders/scan', {
     method: 'POST',
     body: JSON.stringify({ path }),
   })
 }
+

@@ -80,3 +80,12 @@ class ProjectRepository:
             return dict(row) if row else None
         finally:
             conn.close()
+
+    def delete(self, project_id: str) -> bool:
+        conn = self._connect()
+        try:
+            cursor = conn.execute("DELETE FROM projects WHERE id = ?", (project_id,))
+            conn.commit()
+            return cursor.rowcount > 0
+        finally:
+            conn.close()

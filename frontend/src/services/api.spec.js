@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, afterEach } from 'vitest'
-import { listProjects, createProject, scanFolder } from './api.js'
+import { listProjects, createProject, deleteProject, scanFolder } from './api.js'
 
 afterEach(() => {
   vi.unstubAllGlobals()
@@ -44,6 +44,18 @@ describe('createProject', () => {
   })
 })
 
+describe('deleteProject', () => {
+  it('DELETEs the project and returns null for a 204', async () => {
+    const fetchMock = stubFetch(null, true, 204)
+
+    await expect(deleteProject('abc')).resolves.toBeNull()
+    expect(fetchMock).toHaveBeenCalledWith(
+      '/api/projects/abc',
+      expect.objectContaining({ method: 'DELETE' })
+    )
+  })
+})
+
 describe('scanFolder', () => {
   it('POSTs the path', async () => {
     const data = [{ name: 'a.jpg' }]
@@ -69,3 +81,4 @@ describe('request errors', () => {
     )
   })
 })
+

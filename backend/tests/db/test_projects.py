@@ -40,3 +40,18 @@ def test_get_returns_none_when_missing(tmp_path):
     repo = ProjectRepository(tmp_path / "test.sqlite3")
 
     assert repo.get("missing") is None
+
+
+def test_delete_removes_record(tmp_path):
+    repo = ProjectRepository(tmp_path / "test.sqlite3")
+    repo.insert(_project(id="abc"))
+
+    assert repo.delete("abc") is True
+    assert repo.get("abc") is None
+    assert repo.list_all() == []
+
+
+def test_delete_returns_false_when_missing(tmp_path):
+    repo = ProjectRepository(tmp_path / "test.sqlite3")
+
+    assert repo.delete("missing") is False

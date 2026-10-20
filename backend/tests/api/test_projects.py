@@ -68,3 +68,20 @@ def test_get_missing_project(client):
     response = client.get("/api/projects/does-not-exist")
 
     assert response.status_code == 404
+
+
+def test_delete_project(client):
+    created = client.post(
+        "/api/projects", json={"name": "Trip", "folder": "/photos"}
+    ).json()
+
+    response = client.delete(f"/api/projects/{created['id']}")
+
+    assert response.status_code == 204
+    assert client.get("/api/projects").json() == []
+
+
+def test_delete_missing_project(client):
+    response = client.delete("/api/projects/does-not-exist")
+
+    assert response.status_code == 404

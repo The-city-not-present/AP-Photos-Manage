@@ -46,3 +46,17 @@ def test_list_and_get(tmp_path):
     assert service.list_all() == [created]
     assert service.get(created["id"]) == created
     assert service.get("missing") is None
+
+
+def test_delete_removes_project(tmp_path):
+    service = make_service(tmp_path)
+    created = service.create("Trip", "/photos")
+
+    assert service.delete(created["id"]) is True
+    assert service.list_all() == []
+
+
+def test_delete_missing_returns_false(tmp_path):
+    service = make_service(tmp_path)
+
+    assert service.delete("missing") is False
