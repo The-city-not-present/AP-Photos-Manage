@@ -1,50 +1,70 @@
 <script setup>
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
 import EmptyState from '../components/EmptyState.vue'
 import RecordsFilter from '../components/records-filter/RecordsFilter.vue'
 import ProjectCard from '../components/ProjectCard.vue'
-import { useAppConfig } from '../config'
+import CreateProjectDialog from '../components/import/CreateProjectDialog.vue'
+import { listProjects } from '../services/api.js'
+import { reportError } from '../services/errors.js'
 
-// Temporary development data lives in src/config/test-projects.js.
-const { testProjects } = useAppConfig()
-const projects = ref(testProjects)
+const projects = ref([])
+const loading = ref(true)
+const showDialog = ref(false)
 
 const columns = {
   name: 'Name',
   description: 'Description',
-  place: 'Place',
-  eventDate: { label: 'Date', type: 'date' },
-  tags: 'Tags',
-  color: 'Color',
-  backupPaths: 'Backup paths',
-  createdAt: { label: 'Created', type: 'date' },
-  devStartedAt: { label: 'Started', type: 'date' },
-  releasedAt: { label: 'Released', type: 'date' },
+  folder: 'Folder',
+  created_at: { label: 'Created', type: 'date' },
 }
+
+async function loadProjects() {
+  loading.value = true
+  try {
+    projects.value = await listProjects()
+  } catch (err) {
+    reportError(err)
+  } finally {
+    loading.value = false
+  }
+}
+
+function openDialog() {
+  showDialog.value = true
+}
+
+function closeDialog() {
+  showDialog.value = false
+}
+
+async function handleCreated() {
+  closeDialog()
+  await loadProjects()
+}
+
+onMounted(loadProjects)
 </script>
 
 <template>
   <section class="container">
     <div class="apph-page-header">
       <h2>Projects</h2>
-      <RouterLink class="apph-btn apph-btn-primary" :to="{ name: 'import' }">
-        Import photos
-      </RouterLink>
+      <button class="apph-btn-create" type="button" @click="openDialog">Create project</button>
     </div>
 
     <p class="apph-page-lede">
       A project is a self-contained photo catalog — its own database, index and
-      caches. Filter and sort below, then pick a project to open it.
+      caches. Create a project from a folder of photos, then open it to curate.
     </p>
 
+    <p v-if="loading" class="apph-u-text-muted">Loading projects…</p>
+
     <EmptyState
-      v-if="projects.length === 0"
+      v-else-if="projects.length === 0"
       title="No projects yet"
-      message="Import a folder of photos to create your first project."
+      message="Create a project from a folder of photos to get started."
     >
-      <RouterLink class="apph-btn apph-btn-primary" :to="{ name: 'import' }">
-        Import photos
-      </RouterLink>
+      <button class="apph-btn-create" type="button" @click="openDialog">Create project</button>
     </EmptyState>
 
     <RecordsFilter
@@ -66,6 +86,8 @@ const columns = {
         </li>
       </ul>
     </RecordsFilter>
+
+    <CreateProjectDialog v-if="showDialog" @close="closeDialog" @created="handleCreated" />
   </section>
 </template>
 
@@ -82,4 +104,30 @@ const columns = {
 .apph-project-list > li {
   padding: 0;
 }
+
+/* Bright green "create" action: medium size, bold white text, and a smooth
+   350ms background-color transition only (no position/size/border change). */
+.apph-btn-create {
+  display: inline-block;
+  padding: 0.55em 1.25em;
+  font: inherit;
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.2;
+  text-align: center;
+  white-space: nowrap;
+  cursor: pointer;
+  border: 1px solid var(--apph-color-green);
+  border-radius: var(--apph-border-radius);
+  background-color: var(--apph-color-green);
+  color: #fff;
+  transition: background-color var(--apph-transition);
+}
+
+.apph-btn-create:hover,
+.apph-btn-create:focus {
+  background-color: var(--apph-color-green-hover);
+  outline: none;
+}
 </style>
+

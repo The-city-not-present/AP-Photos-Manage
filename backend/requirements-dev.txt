@@ -1,0 +1,5 @@
+-r requirements.txt
+
+# Test tooling (not needed at runtime).
+pytest>=8
+httpx2>=2.0

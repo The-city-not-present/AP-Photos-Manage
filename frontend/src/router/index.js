@@ -2,7 +2,6 @@ import { createRouter, createWebHistory } from 'vue-router'
 
 import OuterLayout from '../views/OuterLayout.vue'
 import WelcomeView from '../views/WelcomeView.vue'
-import ImportView from '../views/ImportView.vue'
 import HelpView from '../views/HelpView.vue'
 import NotFoundView from '../views/NotFoundView.vue'
 
@@ -21,7 +20,6 @@ const router = createRouter({
       component: OuterLayout,
       children: [
         { path: '', name: 'welcome', component: WelcomeView },
-        { path: 'import', name: 'import', component: ImportView },
         { path: 'help', name: 'help', component: HelpView },
       ],
     },
