@@ -1,5 +1,6 @@
 <script setup>
 import { ref, onErrorCaptured } from 'vue'
+import { reportError } from '../services/errors.js'
 
 const error = ref(null)
 const resetKey = ref(0)
@@ -9,7 +10,7 @@ onErrorCaptured((err) => {
   // Force a full remount of the boundary content so the broken subtree is
   // discarded cleanly instead of being patched in-place.
   resetKey.value++
-  console.error('[ErrorBoundary]', err)
+  reportError(err)
   return false
 })
 

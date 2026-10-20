@@ -1,5 +1,6 @@
 <script setup>
 import { ref, onMounted } from 'vue'
+import { reportError } from '../services/errors.js'
 
 const status = ref('loading')
 
@@ -8,8 +9,9 @@ onMounted(async () => {
     const res = await fetch('/api/health')
     const data = await res.json()
     status.value = data.status ?? 'unknown'
-  } catch {
+  } catch (err) {
     status.value = 'unreachable'
+    reportError(err)
   }
 })
 </script>
