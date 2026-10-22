@@ -144,6 +144,8 @@ common components:
 - **Relative imports only.** Modules import their neighbours via `./` and `../`,
   never via an app-root path, so each component stays self-contained even if it
   is relocated.
+- **Project context is kept in `docs/project-context.md`.** Each task begins by
+  reading it and ends by updating it with the latest observations and reasoning.
 - Keep the structure **minimal for now** — exact decisions are made later, and
   the layout will grow (with deeper nesting) as components are added.
 
