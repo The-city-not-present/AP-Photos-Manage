@@ -15,19 +15,16 @@ app.config.errorHandler = (err) => {
 }
 
 // Last-resort handlers so errors from timers, event handlers and unhandled
-// promise rejections still reach the banner and the console.
+// promise rejections still reach the banner and the console. `reportError`
+// reports everything it is given, so these forward the caught value as-is.
 window.addEventListener('error', (event) => {
-  if (event.error instanceof Error) {
-    event.preventDefault()
-    reportError(event.error)
-  }
+  event.preventDefault()
+  reportError(event.error ?? new Error(event.message))
 })
 
 window.addEventListener('unhandledrejection', (event) => {
-  if (event.reason instanceof Error) {
-    event.preventDefault()
-    reportError(event.reason)
-  }
+  event.preventDefault()
+  reportError(event.reason)
 })
 
 // Common components, registered globally so they are available in any template.

@@ -2,12 +2,18 @@
 import { useErrors } from '../services/errors.js'
 
 const errors = useErrors()
+
+// The global list may hold any value `reportError` was given, not just `Error`
+// instances, so render each line safely instead of assuming `.message` exists.
+function message(error) {
+  return error?.message ?? String(error)
+}
 </script>
 
 <template>
   <div class="apph-error-banner" role="alert" aria-live="assertive">
     <div v-for="(error, index) in errors" :key="index" class="apph-error-banner-item">
-      {{ error.message || String(error) }}
+      {{ message(error) }}
     </div>
   </div>
 </template>

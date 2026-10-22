@@ -27,12 +27,10 @@ describe('reportError', () => {
     expect(useErrors().value).toEqual([a, b])
   })
 
-  it('ignores non-Error values (cancel signals)', () => {
-    reportError('cancel')
-    reportError(undefined)
-    reportError(null)
-    reportError({ code: 'CANCELLED' })
-    expect(useErrors().value).toEqual([])
+  it('records non-Error values too — reportError never filters', () => {
+    const values = ['cancel', undefined, null, { code: 'CANCELLED' }]
+    values.forEach(reportError)
+    expect(useErrors().value).toEqual(values)
   })
 
   it('logs an Error to the console with its stack trace', () => {
@@ -41,9 +39,9 @@ describe('reportError', () => {
     expect(consoleErrorSpy).toHaveBeenCalledWith(err)
   })
 
-  it('does not log non-Error values', () => {
+  it('logs non-Error values to the console', () => {
     reportError('cancel')
-    expect(consoleErrorSpy).not.toHaveBeenCalled()
+    expect(consoleErrorSpy).toHaveBeenCalledWith('cancel')
   })
 })
 

@@ -5,12 +5,12 @@ import { ref } from 'vue'
 //   1. surfaced in the global error banner (one line per error), and
 //   2. logged to the console so the stack trace is printed natively.
 //
-// Non-Error values (e.g. a rejected promise used as a "cancel" signal) are
-// ignored on purpose — they are not real errors.
+// `reportError` is a plain reporter: it always reports exactly the value it is
+// given and never filters its input. Deciding whether a value is an error is
+// the caller's job (see the Async note in .clinerules/03-javascript.md).
 const errors = ref([])
 
 export function reportError(err) {
-  if (!(err instanceof Error)) return
   errors.value.push(err)
   console.error(err)
 }
