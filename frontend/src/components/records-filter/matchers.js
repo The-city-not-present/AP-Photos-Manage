@@ -1,5 +1,7 @@
 // Pure, isolated matching/sorting helpers used by RecordsFilter.
-// Kept dependency-free so they can be unit-tested on their own.
+// Kept free of Vue/DOM so they can be unit-tested on their own.
+
+import { toDate } from '../format/datetime.js'
 
 const toText = (value) => {
   if (value == null) return ''
@@ -28,10 +30,12 @@ export function matchNumericRange(fieldValue, matchValue) {
 
 export function matchDatetimeRange(fieldValue, matchValue) {
   const { from, to } = matchValue || {}
-  const time = new Date(fieldValue).getTime()
+  const time = toDate(fieldValue)
+  const startDate = toDate(from)
+  const endDate = toDate(to)
   let ok = true
-  if (!isEmpty(from)) ok = ok && Number.isFinite(time) && time >= new Date(from).getTime()
-  if (!isEmpty(to)) ok = ok && Number.isFinite(time) && time <= new Date(to).getTime()
+  if (startDate != null) ok = ok && time != null && time.getTime() >= startDate.getTime()
+  if (endDate != null) ok = ok && time != null && time.getTime() <= endDate.getTime()
   return ok
 }
 
@@ -49,10 +53,10 @@ export function compareValues(a, b, type = 'text', ascending = true) {
     return (na - nb) * dir
   }
   if (type === 'date' || type === 'datetime') {
-    const ta = new Date(a).getTime()
-    const tb = new Date(b).getTime()
-    const na = Number.isFinite(ta) ? ta : 0
-    const nb = Number.isFinite(tb) ? tb : 0
+    const ta = toDate(a)
+    const tb = toDate(b)
+    const na = ta != null ? ta.getTime() : 0
+    const nb = tb != null ? tb.getTime() : 0
     return (na - nb) * dir
   }
   return toText(a).localeCompare(toText(b)) * dir

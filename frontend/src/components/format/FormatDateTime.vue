@@ -1,5 +1,6 @@
 <script setup>
 import { computed } from 'vue'
+import { toDate } from './datetime.js'
 
 const props = defineProps({
   dt: { type: [String, Number, Date], default: null },
@@ -26,8 +27,8 @@ const formatter = computed(() =>
 const text = computed(() => {
   const value = props.dt
   if (value == null || value === '') return ''
-  const date = value instanceof Date ? value : new Date(value)
-  if (Number.isNaN(date.getTime())) return String(value)
+  const date = toDate(value)
+  if (date == null) return String(value)
   return formatter.value.format(date)
 })
 </script>

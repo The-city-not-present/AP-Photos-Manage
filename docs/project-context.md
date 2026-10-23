@@ -5,24 +5,36 @@
 
 ## Current state
 
-- Added `.clinerules/00-project-context.md` (sorts first) mandating that this file
-  is read at the start and updated on every task.
-- Created this `docs/project-context.md` as the living summary document.
-- Added a brief mention of it to `README.md` under "Development conventions".
+- Reviewed date handling in the reusable filtering component
+  (`frontend/src/components/records-filter/`) and fixed date/datetime range
+  comparisons.
+- Added a shared date/time helper `frontend/src/components/format/datetime.js`
+  (`toDate`, `toDateString`, `toDateTimeLocalString`).
+- `RangeInput` now emits native `Date` objects for `date`/`datetime` kinds (was
+  raw strings from the native inputs).
+- `FormatDateTime` now uses the shared `toDate` helper too.
+- Added the "`Date` objects inside the JS app" principle to
+  `.clinerules/06-dates-and-time.md`.
 
 ## Observations & findings
 
-- `.clinerules/` rules are numbered files (`01-` … `08-`); `08-commit-messages`
-  has no `.md` extension while the others do. A `00-` prefix was used for the new
-  rule to keep it first without renumbering the rest.
-- The `docs/` directory did not exist before this task.
+- `new Date(string)` is ambiguous: a bare `YYYY-MM-DD` parses as UTC midnight,
+  while `YYYY-MM-DDTHH:mm` (from `<input type="datetime-local">`) parses as
+  local time. Mixing these caused off-by-one-day range matches around timezone
+  boundaries.
+- The matcher (`matchers.js`) already compared epoch ms via `getTime()`, not raw
+  `>=`/`<=` on strings, but it still normalized each side with `new Date(...)`
+  independently, so the ambiguity above leaked in.
 
 ## Decisions & reasoning
 
-- Named the rule file `00-project-context.md` instead of renumbering all existing
-  rules, to minimize churn.
-- Gave `docs/project-context.md` a small template (Current state / Observations &
-  findings / Decisions & reasoning / Open questions) so future updates have a
-  consistent shape and can replace outdated notes rather than append endlessly.
+- Centralized date parsing/formatting in `components/format/datetime.js` instead
+  of duplicating the tricky rules in `matchers.js` and `RangeInput.vue`.
+- Treat a bare `YYYY-MM-DD` as a *local* calendar date (via
+  `new Date(y, m - 1, d)`) to match the "user-entered dates are local" rule.
+- Kept the comparison on `Date` objects (compared as `getTime()`), preserving
+  blank-filter semantics (a blank range still matches everything, even invalid
+  field dates).
 
 ## Open questions
+

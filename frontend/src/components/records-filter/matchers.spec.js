@@ -80,6 +80,26 @@ describe('matchDatetimeRange', () => {
     expect(matchDatetimeRange('2023-01-01T00:00:00Z', { from: '2024-01-01', to: '2024-12-31' })).toBe(false)
     expect(matchDatetimeRange('2025-01-01T00:00:00Z', { from: '2024-01-01', to: '2024-12-31' })).toBe(false)
   })
+
+  it('accepts Date objects for the field and the bounds', () => {
+    expect(
+      matchDatetimeRange(new Date('2024-06-01T00:00:00Z'), {
+        from: new Date('2024-01-01T00:00:00Z'),
+        to: new Date('2024-12-31T00:00:00Z'),
+      })
+    ).toBe(true)
+    expect(
+      matchDatetimeRange(new Date('2023-01-01T00:00:00Z'), {
+        from: new Date('2024-01-01T00:00:00Z'),
+      })
+    ).toBe(false)
+  })
+
+  it('treats bare calendar dates as local dates, not UTC', () => {
+    // A date-only field vs. date-only bounds must match regardless of timezone.
+    expect(matchDatetimeRange('2025-07-12', { from: '2025-01-01', to: '2025-12-31' })).toBe(true)
+    expect(matchDatetimeRange('2026-01-01', { from: '2025-01-01', to: '2025-12-31' })).toBe(false)
+  })
 })
 
 describe('matchValue', () => {

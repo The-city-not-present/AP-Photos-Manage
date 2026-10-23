@@ -1,5 +1,6 @@
 <script setup>
 import { computed, nextTick, ref } from 'vue'
+import { toDate, toDateString, toDateTimeLocalString } from '../format/datetime.js'
 
 const props = defineProps({
   kind: { type: String, default: 'number' }, // 'number' | 'date' | 'datetime'
@@ -23,11 +24,20 @@ const nativeType = computed(() => {
   return 'number'
 })
 
+function formatBound(value) {
+  if (value == null || value === '') return ''
+  if (props.kind === 'number') return String(value)
+  if (value instanceof Date) {
+    return props.kind === 'date' ? toDateString(value) : toDateTimeLocalString(value)
+  }
+  return String(value)
+}
+
 function toInputValue(value) {
   if (value == null || value === '') return ''
   if (typeof value === 'object') {
-    const from = value.from ?? ''
-    const to = value.to ?? ''
+    const from = formatBound(value.from ?? '')
+    const to = formatBound(value.to ?? '')
     if (from === '' && to === '') return ''
     return `${from}..${to}`
   }
@@ -47,7 +57,7 @@ function normalizeValue(value) {
     const n = Number(value)
     return Number.isNaN(n) ? null : n
   }
-  return value
+  return toDate(value)
 }
 
 function positionPopup() {
@@ -66,8 +76,8 @@ function positionPopup() {
 
 function openPicker() {
   draft.value = {
-    from: props.modelValue?.from ?? null,
-    to: props.modelValue?.to ?? null,
+    from: formatBound(props.modelValue?.from ?? null),
+    to: formatBound(props.modelValue?.to ?? null),
   }
   positionPopup()
   open.value = true
