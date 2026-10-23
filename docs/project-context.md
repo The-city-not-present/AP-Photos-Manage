@@ -5,6 +5,14 @@
 
 ## Current state
 
+- Introduced a running TODO list at `docs/roadmap.md` (same pattern as the
+  `apqa` project); first entry: decide on a better project name.
+- Aligned `.clinerules/00-project-context.md` with the `apqa` project-context
+  pattern and added `.clinerules/00-non-interactive-terminal-commands.md` as a
+  fallback rule for Git pager issues.
+- Project name is currently inconsistent across the repo: git remote
+  `AP-Photos-Manage`, directory/package `apphotoassistant`, README/UI title
+  "App Photo Assistant", backend env var `APP_PHOTO_ASSISTANT_LIBRARY`.
 - Reviewed date handling in the reusable filtering component
   (`frontend/src/components/records-filter/`) and fixed date/datetime range
   comparisons.
@@ -25,6 +33,10 @@
 - The matcher (`matchers.js`) already compared epoch ms via `getTime()`, not raw
   `>=`/`<=` on strings, but it still normalized each side with `new Date(...)`
   independently, so the ambiguity above leaked in.
+- The project name lives in several places: `README.md`, `frontend/index.html`,
+  `frontend/src/views/OuterLayout.vue`, `frontend/src/config/help-page.js`,
+  `frontend/package.json` (+ `package-lock.json`), `backend/app/config.py` and
+  `backend/app/__init__.py`.
 
 ## Decisions & reasoning
 
@@ -35,6 +47,12 @@
 - Kept the comparison on `Date` objects (compared as `getTime()`), preserving
   blank-filter semantics (a blank range still matches everything, even invalid
   field dates).
+- Ad-hoc TODO items live in `docs/roadmap.md`, separate from the milestone plan
+  in `README.md`, so ideas are captured without cluttering the README.
 
 ## Open questions
+
+- What should the project be named? See `docs/roadmap.md`. The name should be a
+  general "manage / housekeep" word covering photos and possibly all files, easy
+  for non-native English speakers; prior AI suggestions were rejected.
 

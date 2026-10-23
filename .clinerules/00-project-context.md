@@ -1,11 +1,15 @@
 # Project context (read & write on every task)
 
-- **Read first.** At the start of every task, read `docs/project-context.md` so
-  work continues from the latest known state instead of re-deriving it from
-  scratch.
-- **Write on every task.** Record overall observations, findings, decisions, and
-  reasoning in `docs/project-context.md` as the work progresses, so the file
-  always reflects the most recent state of the current chats.
-- **Keep it current, not growing.** `docs/project-context.md` is a living summary
-  of the last state. Update it constantly — replace outdated notes rather than
-  appending endlessly — so it captures the latest understanding at all times.
+- On **every task**, start by reading `docs/project-context.md` to load the latest
+  state, findings, and reasoning from previous chats.
+- On **every task**, before finishing, update `docs/project-context.md` with your
+  overall observations, findings, and reasoning from this task.
+- `docs/project-context.md` must always reflect the **latest state** of the
+  project and of the current conversation. It is a living document that is
+  **constantly updated** — replace stale information instead of appending
+  indefinitely.
+- Record at minimum: key decisions and *why*, the current state of work in
+  progress, open questions, gotchas, and anything the next chat would need to
+  continue without re-deriving context.
+- Keep it focused, accurate, and current. If the document is missing or empty,
+  create/seed it with a concise summary of the repo's current state.

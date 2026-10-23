@@ -146,6 +146,9 @@ common components:
   is relocated.
 - **Project context is kept in `docs/project-context.md`.** Each task begins by
   reading it and ends by updating it with the latest observations and reasoning.
+- **Ad-hoc TODOs are captured in `docs/roadmap.md`.** Ideas that come to mind
+  are listed there as a running, informal list, separate from the milestone plan
+  below.
 - Keep the structure **minimal for now** — exact decisions are made later, and
   the layout will grow (with deeper nesting) as components are added.
 
@@ -159,6 +162,8 @@ common components:
 3. **M3 — Tags & journeys.** Keyword tagging, collections, search.
 4. **M4 — People.** Face detection, clustering, labeling, fair-representation
    report.
+
+The informal, running TODO list lives in [`docs/roadmap.md`](docs/roadmap.md).
 
 ## Running
 
