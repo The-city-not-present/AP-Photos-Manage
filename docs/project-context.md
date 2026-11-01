@@ -5,6 +5,16 @@
 
 ## Current state
 
+- Rewrote `README.md` to be short and human-readable (goals + naming + brief
+  links) and moved all technical details (architecture, repo layout, running,
+  performance, caching, non-destructive editing, conventions, roadmap,
+  assessment design notes) into a new `docs/developers.md`.
+- Added a short `## Run it` section to `README.md` with the exact launch
+  commands (backend venv + uvicorn, frontend npm + Vite) so a fresh `git clone`
+  gets going without reading `docs/developers.md`.
+- Added a note in `docs/developers.md` explaining why the Python floor is 3.12+
+  (modern ergonomics: PEP 701 f-strings, PEP 695 generics; stated floor, not
+  enforced; revisit when a real `python_requires` pin is introduced).
 - Introduced a running TODO list at `docs/roadmap.md` (same pattern as the
   `apqa` project); first entry: decide on a better project name.
 - Aligned `.clinerules/00-project-context.md` with the `apqa` project-context
@@ -51,7 +61,7 @@
   blank-filter semantics (a blank range still matches everything, even invalid
   field dates).
 - Ad-hoc TODO items live in `docs/roadmap.md`, separate from the milestone plan
-  in `README.md`, so ideas are captured without cluttering the README.
+  in `docs/developers.md`, so ideas are captured without cluttering the README.
 
 ## Open questions
 
