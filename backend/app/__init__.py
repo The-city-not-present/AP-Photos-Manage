@@ -1,1 +1,1 @@
-"""App Photo Assistant backend package."""
+"""Rabid Printer backend package."""

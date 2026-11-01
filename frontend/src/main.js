@@ -28,8 +28,8 @@ window.addEventListener('unhandledrejection', (event) => {
 })
 
 // Common components, registered globally so they are available in any template.
-app.component('apph-range-input', RangeInput)
-app.component('apph-format-datetime', FormatDateTime)
-app.component('apph-format-filesize', FormatFileSize)
+app.component('apprinter-range-input', RangeInput)
+app.component('apprinter-format-datetime', FormatDateTime)
+app.component('apprinter-format-filesize', FormatFileSize)
 
 app.use(router).mount('#app')

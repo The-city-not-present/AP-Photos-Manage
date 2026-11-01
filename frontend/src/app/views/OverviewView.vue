@@ -15,14 +15,14 @@ const scope = [
 <template>
   <section class="container">
     <h2>Overview</h2>
-    <p class="apph-page-lede">
+    <p class="apprinter-page-lede">
       Project <code>{{ projectId }}</code> is loaded.
     </p>
 
-    <ul class="apph-scope-list">
-      <li v-for="item in scope" :key="item.name" class="apph-scope-list-item">
+    <ul class="apprinter-scope-list">
+      <li v-for="item in scope" :key="item.name" class="apprinter-scope-list-item">
         <span>{{ item.name }}</span>
-        <span class="apph-scope-status" :class="`apph-scope-status-${item.status}`">
+        <span class="apprinter-scope-status" :class="`apprinter-scope-status-${item.status}`">
           {{ item.status }}
         </span>
       </li>
@@ -31,36 +31,36 @@ const scope = [
 </template>
 
 <style scoped>
-.apph-scope-list {
+.apprinter-scope-list {
   list-style: none;
   margin: 0;
   padding: 0;
   display: flex;
   flex-direction: column;
-  gap: var(--apph-space-0-25x);
+  gap: var(--apprinter-space-0-25x);
   max-width: 480px;
 }
 
-.apph-scope-list-item {
+.apprinter-scope-list-item {
   display: flex;
   justify-content: space-between;
-  padding: var(--apph-space-0-25x) var(--apph-space-0-5x);
-  background: var(--apph-color-surface);
-  border: 1px solid var(--apph-border-color);
-  border-radius: var(--apph-border-radius);
+  padding: var(--apprinter-space-0-25x) var(--apprinter-space-0-5x);
+  background: var(--apprinter-color-surface);
+  border: 1px solid var(--apprinter-border-color);
+  border-radius: var(--apprinter-border-radius);
 }
 
-.apph-scope-status {
+.apprinter-scope-status {
   font-size: 0.8rem;
   font-weight: 600;
   text-transform: uppercase;
 }
 
-.apph-scope-status-ready {
+.apprinter-scope-status-ready {
   color: #15803d;
 }
 
-.apph-scope-status-empty {
-  color: var(--apph-color-muted);
+.apprinter-scope-status-empty {
+  color: var(--apprinter-color-muted);
 }
 </style>

@@ -7,15 +7,15 @@ defineProps({
 </script>
 
 <template>
-  <div class="apph-photo-grid">
+  <div class="apprinter-photo-grid">
     <PhotoThumb v-for="photo in photos" :key="photo.path" :photo="photo" />
   </div>
 </template>
 
 <style scoped>
-.apph-photo-grid {
+.apprinter-photo-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-  gap: var(--apph-space-0-5x);
+  gap: var(--apprinter-space-0-5x);
 }
 </style>

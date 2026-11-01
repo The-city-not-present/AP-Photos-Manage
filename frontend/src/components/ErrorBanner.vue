@@ -11,8 +11,8 @@ function message(error) {
 </script>
 
 <template>
-  <div class="apph-error-banner" role="alert" aria-live="assertive">
-    <div v-for="(error, index) in errors" :key="index" class="apph-error-banner-item">
+  <div class="apprinter-error-banner" role="alert" aria-live="assertive">
+    <div v-for="(error, index) in errors" :key="index" class="apprinter-error-banner-item">
       {{ message(error) }}
     </div>
   </div>
@@ -21,15 +21,15 @@ function message(error) {
 <style scoped>
 /* No padding/margin/border on the container: it collapses to zero height when
    there are no errors and grows by exactly one line per error. */
-.apph-error-banner {
+.apprinter-error-banner {
   display: flex;
   flex-direction: column;
-  gap: var(--apph-space-0-125x);
+  gap: var(--apprinter-space-0-125x);
 }
 
-.apph-error-banner-item {
-  padding: var(--apph-space-0-25x) var(--apph-space-0-5x);
-  background: var(--apph-color-reject);
+.apprinter-error-banner-item {
+  padding: var(--apprinter-space-0-25x) var(--apprinter-space-0-5x);
+  background: var(--apprinter-color-reject);
   color: #fff;
   font-size: 0.9rem;
 }

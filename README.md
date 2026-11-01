@@ -1,6 +1,6 @@
-# App Photo Assistant
+# Rabid Printer
 
-A personal photo assistant for **managing and sorting** your photo library.
+A personal photo manager for **managing and sorting** your photo library.
 
 The goal is the *management* side of tools like Lightroom (its Library module),
 ACDSee or Adobe Bridge — everything except pixel editing. It is not about any
@@ -97,7 +97,7 @@ added later if it ever becomes necessary.
 ## Repository layout
 
 ```
-apphotoassistant/
+rabid-printer/
 ├── README.md
 ├── .gitignore
 ├── backend/

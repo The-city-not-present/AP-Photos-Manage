@@ -51,18 +51,18 @@ watch(() => props.projectId, loadProject)
 </script>
 
 <template>
-  <div class="apph-project-app">
+  <div class="apprinter-project-app">
     <AppHeader
       :title="loading ? 'Loading project…' : project.name"
       subtitle="Loaded project environment"
     >
-      <button class="apph-btn" @click="closeProject">Close project</button>
+      <button class="apprinter-btn" @click="closeProject">Close project</button>
     </AppHeader>
 
     <AppNav :links="navLinks" />
 
-    <main class="apph-project-app-main">
-      <p v-if="loading" class="apph-project-app-loading">Opening project…</p>
+    <main class="apprinter-project-app-main">
+      <p v-if="loading" class="apprinter-project-app-loading">Opening project…</p>
       <ErrorBoundary v-else>
         <RouterView />
       </ErrorBoundary>
@@ -71,19 +71,19 @@ watch(() => props.projectId, loadProject)
 </template>
 
 <style scoped>
-.apph-project-app {
+.apprinter-project-app {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
 }
 
-.apph-project-app-main {
+.apprinter-project-app-main {
   flex: 1;
-  padding: var(--apph-space-0-5x) 0;
+  padding: var(--apprinter-space-0-5x) 0;
 }
 
-.apph-project-app-loading {
-  padding: var(--apph-space);
-  color: var(--apph-color-muted);
+.apprinter-project-app-loading {
+  padding: var(--apprinter-space);
+  color: var(--apprinter-color-muted);
 }
 </style>

@@ -30,32 +30,32 @@ onBeforeUnmount(() => document.removeEventListener('click', onDocumentClick))
 </script>
 
 <template>
-  <article class="apph-project-card">
-    <header class="apph-project-card-header">
-      <h3 class="apph-project-card-name">
+  <article class="apprinter-project-card">
+    <header class="apprinter-project-card-header">
+      <h3 class="apprinter-project-card-name">
         <RouterLink :to="{ name: 'project-overview', params: { projectId: project.id } }">
           {{ project.name }}
         </RouterLink>
       </h3>
-      <div class="apph-project-card-actions">
+      <div class="apprinter-project-card-actions">
         <RouterLink
-          class="apph-btn apph-project-card-open"
+          class="apprinter-btn apprinter-project-card-open"
           :to="{ name: 'project-overview', params: { projectId: project.id } }"
         >
           Open
         </RouterLink>
-        <div ref="menuRoot" class="apph-project-card-menu">
+        <div ref="menuRoot" class="apprinter-project-card-menu">
           <button
-            class="apph-project-card-menu-btn"
+            class="apprinter-project-card-menu-btn"
             type="button"
             aria-haspopup="menu"
             :aria-expanded="menuOpen"
             aria-label="More actions"
             @click.stop="toggleMenu"
           >⋯</button>
-          <div v-if="menuOpen" class="apph-project-card-menu-pop" role="menu">
+          <div v-if="menuOpen" class="apprinter-project-card-menu-pop" role="menu">
             <button
-              class="apph-project-card-menu-item"
+              class="apprinter-project-card-menu-item"
               type="button"
               role="menuitem"
               @click="requestDelete"
@@ -67,122 +67,122 @@ onBeforeUnmount(() => document.removeEventListener('click', onDocumentClick))
       </div>
     </header>
 
-    <p v-if="project.description" class="apph-project-card-description">{{ project.description }}</p>
+    <p v-if="project.description" class="apprinter-project-card-description">{{ project.description }}</p>
 
-    <dl class="apph-project-card-attrs">
+    <dl class="apprinter-project-card-attrs">
       <div>
         <dt>Folder</dt>
         <dd>{{ project.folder }}</dd>
       </div>
       <div v-if="project.created_at">
         <dt>Created</dt>
-        <dd><apph-format-datetime :dt="project.created_at" /></dd>
+        <dd><apprinter-format-datetime :dt="project.created_at" /></dd>
       </div>
     </dl>
   </article>
 </template>
 
 <style scoped>
-.apph-project-card {
-  background: var(--apph-color-surface);
-  border: 1px solid var(--apph-border-color);
-  border-radius: var(--apph-border-radius);
-  color: var(--apph-color-text);
-  padding: var(--apph-space-0-5x) var(--apph-space-0-75x);
+.apprinter-project-card {
+  background: var(--apprinter-color-surface);
+  border: 1px solid var(--apprinter-border-color);
+  border-radius: var(--apprinter-border-radius);
+  color: var(--apprinter-color-text);
+  padding: var(--apprinter-space-0-5x) var(--apprinter-space-0-75x);
 }
 
-.apph-project-card-header {
+.apprinter-project-card-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: var(--apph-space-0-5x);
+  gap: var(--apprinter-space-0-5x);
 }
 
-.apph-project-card-name {
+.apprinter-project-card-name {
   margin: 0;
   padding: 0;
   font-size: 1.1rem;
 }
 
-.apph-project-card-name a {
-  color: var(--apph-color-text);
+.apprinter-project-card-name a {
+  color: var(--apprinter-color-text);
   text-decoration: none;
 }
 
-.apph-project-card-name a:hover {
-  color: var(--apph-color-link-hover);
+.apprinter-project-card-name a:hover {
+  color: var(--apprinter-color-link-hover);
   text-decoration: underline;
 }
 
-.apph-project-card-actions {
+.apprinter-project-card-actions {
   display: flex;
   align-items: center;
-  gap: var(--apph-space-0-25x);
+  gap: var(--apprinter-space-0-25x);
 }
 
-.apph-project-card-description {
-  margin: var(--apph-space-0-125x) 0 0;
-  color: var(--apph-color-muted);
+.apprinter-project-card-description {
+  margin: var(--apprinter-space-0-125x) 0 0;
+  color: var(--apprinter-color-muted);
 }
 
-.apph-project-card-attrs {
-  margin: var(--apph-space-0-25x) 0 0;
+.apprinter-project-card-attrs {
+  margin: var(--apprinter-space-0-25x) 0 0;
   display: grid;
-  gap: var(--apph-space-0-125x);
+  gap: var(--apprinter-space-0-125x);
 }
 
-.apph-project-card-attrs div {
+.apprinter-project-card-attrs div {
   display: grid;
   grid-template-columns: 90px 1fr;
-  gap: var(--apph-space-0-5x);
+  gap: var(--apprinter-space-0-5x);
 }
 
-.apph-project-card-attrs dt {
+.apprinter-project-card-attrs dt {
   font-weight: 600;
-  color: var(--apph-color-muted);
+  color: var(--apprinter-color-muted);
   font-size: 0.85rem;
 }
 
-.apph-project-card-attrs dd {
+.apprinter-project-card-attrs dd {
   margin: 0;
   overflow-wrap: anywhere;
 }
 
 /* Subtle "more actions" menu — deliberately quiet, not red. */
-.apph-project-card-menu {
+.apprinter-project-card-menu {
   position: relative;
 }
 
-.apph-project-card-menu-btn {
+.apprinter-project-card-menu-btn {
   border: none;
   background: transparent;
   cursor: pointer;
   font: inherit;
-  color: var(--apph-color-muted);
+  color: var(--apprinter-color-muted);
   padding: 0.1em 0.45em;
-  border-radius: var(--apph-border-radius);
+  border-radius: var(--apprinter-border-radius);
 }
 
-.apph-project-card-menu-btn:hover,
-.apph-project-card-menu-btn:focus {
-  background: var(--apph-color-bg);
+.apprinter-project-card-menu-btn:hover,
+.apprinter-project-card-menu-btn:focus {
+  background: var(--apprinter-color-bg);
   outline: none;
 }
 
-.apph-project-card-menu-pop {
+.apprinter-project-card-menu-pop {
   position: absolute;
   top: 100%;
   right: 0;
   z-index: 10;
   min-width: 120px;
-  background: var(--apph-color-surface);
-  border: 1px solid var(--apph-border-color);
-  border-radius: var(--apph-border-radius);
+  background: var(--apprinter-color-surface);
+  border: 1px solid var(--apprinter-border-color);
+  border-radius: var(--apprinter-border-radius);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
-  padding: var(--apph-space-0-125x);
+  padding: var(--apprinter-space-0-125x);
 }
 
-.apph-project-card-menu-item {
+.apprinter-project-card-menu-item {
   display: block;
   width: 100%;
   text-align: left;
@@ -190,14 +190,14 @@ onBeforeUnmount(() => document.removeEventListener('click', onDocumentClick))
   background: transparent;
   cursor: pointer;
   font: inherit;
-  color: var(--apph-color-text);
+  color: var(--apprinter-color-text);
   padding: 0.35em 0.6em;
-  border-radius: var(--apph-border-radius);
+  border-radius: var(--apprinter-border-radius);
 }
 
-.apph-project-card-menu-item:hover,
-.apph-project-card-menu-item:focus {
-  background: var(--apph-color-bg);
+.apprinter-project-card-menu-item:hover,
+.apprinter-project-card-menu-item:focus {
+  background: var(--apprinter-color-bg);
   outline: none;
 }
 </style>

@@ -7,47 +7,47 @@ defineProps({
 </script>
 
 <template>
-  <header class="apph-app-header" :class="{ 'apph-app-header--visually-hidden': visuallyHidden }">
+  <header class="apprinter-app-header" :class="{ 'apprinter-app-header--visually-hidden': visuallyHidden }">
     <div>
-      <h1 class="apph-app-header-title">{{ title }}</h1>
-      <p v-if="subtitle" class="apph-app-header-subtitle">{{ subtitle }}</p>
+      <h1 class="apprinter-app-header-title">{{ title }}</h1>
+      <p v-if="subtitle" class="apprinter-app-header-subtitle">{{ subtitle }}</p>
     </div>
-    <div v-if="$slots.default" class="apph-app-header-actions">
+    <div v-if="$slots.default" class="apprinter-app-header-actions">
       <slot />
     </div>
   </header>
 </template>
 
 <style scoped>
-.apph-app-header {
+.apprinter-app-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: var(--apph-space-0-5x);
-  padding: var(--apph-space-0-5x) var(--apph-space);
-  background: var(--apph-color-surface);
-  border-bottom: 1px solid var(--apph-border-color);
+  gap: var(--apprinter-space-0-5x);
+  padding: var(--apprinter-space-0-5x) var(--apprinter-space);
+  background: var(--apprinter-color-surface);
+  border-bottom: 1px solid var(--apprinter-border-color);
 }
 
-.apph-app-header-title {
+.apprinter-app-header-title {
   margin: 0;
   padding: 0;
   font-size: 1.25rem;
 }
 
-.apph-app-header-subtitle {
+.apprinter-app-header-subtitle {
   margin: 0.15rem 0 0;
-  color: var(--apph-color-muted);
+  color: var(--apprinter-color-muted);
   font-size: 0.9rem;
 }
 
-.apph-app-header-actions {
+.apprinter-app-header-actions {
   display: flex;
   align-items: center;
-  gap: var(--apph-space-0-25x);
+  gap: var(--apprinter-space-0-25x);
 }
 
-.apph-app-header--visually-hidden {
+.apprinter-app-header--visually-hidden {
   position: absolute;
   width: 1px;
   height: 1px;

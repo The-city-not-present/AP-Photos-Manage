@@ -10,7 +10,7 @@ defineProps({
 <template>
   <section class="container">
     <h2>Catalog</h2>
-    <p class="apph-page-lede">
+    <p class="apprinter-page-lede">
       Photos imported into project <code>{{ projectId }}</code> will appear here.
     </p>
 

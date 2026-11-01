@@ -17,23 +17,23 @@ onMounted(async () => {
 </script>
 
 <template>
-  <span class="apph-backend-status" :data-status="status">Backend: {{ status }}</span>
+  <span class="apprinter-backend-status" :data-status="status">Backend: {{ status }}</span>
 </template>
 
 <style scoped>
-.apph-backend-status {
-  color: var(--apph-color-muted);
+.apprinter-backend-status {
+  color: var(--apprinter-color-muted);
 }
 
-.apph-backend-status[data-status='ok'] {
+.apprinter-backend-status[data-status='ok'] {
   color: #15803d;
 }
 
-.apph-backend-status[data-status='unreachable'] {
+.apprinter-backend-status[data-status='unreachable'] {
   color: #b91c1c;
 }
 
-.apph-backend-status[data-status='unknown'] {
+.apprinter-backend-status[data-status='unknown'] {
   color: #b45309;
 }
 </style>

@@ -56,24 +56,24 @@ onMounted(loadProjects)
 
 <template>
   <section class="container">
-    <div class="apph-page-header">
+    <div class="apprinter-page-header">
       <h2>Projects</h2>
-      <button class="apph-btn-create" type="button" @click="openDialog">Create project</button>
+      <button class="apprinter-btn-create" type="button" @click="openDialog">Create project</button>
     </div>
 
-    <p class="apph-page-lede">
+    <p class="apprinter-page-lede">
       A project is a self-contained photo catalog — its own database, index and
       caches. Create a project from a folder of photos, then open it to curate.
     </p>
 
-    <p v-if="loading" class="apph-u-text-muted">Loading projects…</p>
+    <p v-if="loading" class="apprinter-u-text-muted">Loading projects…</p>
 
     <EmptyState
       v-else-if="projects.length === 0"
       title="No projects yet"
       message="Create a project from a folder of photos to get started."
     >
-      <button class="apph-btn-create" type="button" @click="openDialog">Create project</button>
+      <button class="apprinter-btn-create" type="button" @click="openDialog">Create project</button>
     </EmptyState>
 
     <RecordsFilter
@@ -85,7 +85,7 @@ onMounted(loadProjects)
       :records-per-page="5"
       v-slot="{ records }"
     >
-      <ul class="apph-project-list">
+      <ul class="apprinter-project-list">
         <li
           v-for="project in records"
           :key="project.id"
@@ -101,22 +101,22 @@ onMounted(loadProjects)
 </template>
 
 <style scoped>
-.apph-project-list {
+.apprinter-project-list {
   list-style: none;
   margin: 0;
   padding: 0;
   display: flex;
   flex-direction: column;
-  gap: var(--apph-space-0-5x);
+  gap: var(--apprinter-space-0-5x);
 }
 
-.apph-project-list > li {
+.apprinter-project-list > li {
   padding: 0;
 }
 
 /* Bright green "create" action: medium size, bold white text, and a smooth
    350ms background-color transition only (no position/size/border change). */
-.apph-btn-create {
+.apprinter-btn-create {
   display: inline-block;
   padding: 0.55em 1.25em;
   font: inherit;
@@ -126,16 +126,16 @@ onMounted(loadProjects)
   text-align: center;
   white-space: nowrap;
   cursor: pointer;
-  border: 1px solid var(--apph-color-green);
-  border-radius: var(--apph-border-radius);
-  background-color: var(--apph-color-green);
+  border: 1px solid var(--apprinter-color-green);
+  border-radius: var(--apprinter-border-radius);
+  background-color: var(--apprinter-color-green);
   color: #fff;
-  transition: background-color var(--apph-transition);
+  transition: background-color var(--apprinter-transition);
 }
 
-.apph-btn-create:hover,
-.apph-btn-create:focus {
-  background-color: var(--apph-color-green-hover);
+.apprinter-btn-create:hover,
+.apprinter-btn-create:focus {
+  background-color: var(--apprinter-color-green-hover);
   outline: none;
 }
 </style>

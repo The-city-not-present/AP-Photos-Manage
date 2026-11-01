@@ -9,13 +9,13 @@ from pathlib import Path
 
 
 class Settings:
-    app_name = "App Photo Assistant"
+    app_name = "Rabid Printer"
 
     # Where the app keeps its own data: the global projects registry and, later,
     # one subdirectory per project (its catalog, caches and search index).
-    # Override with the APP_PHOTO_ASSISTANT_LIBRARY environment variable.
+    # Override with the RABID_PRINTER_LIBRARY environment variable.
     library_root = Path(
-        os.environ.get("APP_PHOTO_ASSISTANT_LIBRARY") or (Path.home() / ".apphotoassistant")
+        os.environ.get("RABID_PRINTER_LIBRARY") or (Path.home() / ".rabid-printer")
     )
 
     @property

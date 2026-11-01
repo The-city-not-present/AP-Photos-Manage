@@ -102,9 +102,9 @@ function cancel() {
 </script>
 
 <template>
-  <div ref="anchorEl" class="apph-range-input">
+  <div ref="anchorEl" class="apprinter-range-input">
     <input
-      class="apph-form-control apph-range-input-field"
+      class="apprinter-form-control apprinter-range-input-field"
       type="text"
       readonly
       :name="name"
@@ -114,22 +114,22 @@ function cancel() {
     />
 
     <Teleport to="body">
-      <div v-if="open" class="apph-range-popup-backdrop" />
-      <div v-if="open" class="apph-range-popup" :style="popupStyle">
-        <form class="apph-range-popup-form" novalidate @submit.prevent="select">
-          <fieldset class="apph-range-popup-row">
+      <div v-if="open" class="apprinter-range-popup-backdrop" />
+      <div v-if="open" class="apprinter-range-popup" :style="popupStyle">
+        <form class="apprinter-range-popup-form" novalidate @submit.prevent="select">
+          <fieldset class="apprinter-range-popup-row">
             <label>
               <span>From</span>
-              <input v-model="draft.from" name="from" :type="nativeType" class="apph-form-control" ref="fromEl" />
+              <input v-model="draft.from" name="from" :type="nativeType" class="apprinter-form-control" ref="fromEl" />
             </label>
             <label>
               <span>to</span>
-              <input v-model="draft.to" name="to" :type="nativeType" class="apph-form-control" ref="toEl" />
+              <input v-model="draft.to" name="to" :type="nativeType" class="apprinter-form-control" ref="toEl" />
             </label>
           </fieldset>
-          <fieldset class="apph-range-popup-actions">
-            <button type="submit" class="apph-btn apph-btn-primary">Select</button>
-            <button type="button" class="apph-btn" @click="cancel">Cancel</button>
+          <fieldset class="apprinter-range-popup-actions">
+            <button type="submit" class="apprinter-btn apprinter-btn-primary">Select</button>
+            <button type="button" class="apprinter-btn" @click="cancel">Cancel</button>
           </fieldset>
         </form>
       </div>
@@ -138,71 +138,71 @@ function cancel() {
 </template>
 
 <style scoped>
-.apph-range-input {
+.apprinter-range-input {
   display: block;
   width: 100%;
 }
 
-.apph-range-input-field {
+.apprinter-range-input-field {
   width: 100%;
   cursor: pointer;
 }
 
-.apph-range-popup-backdrop {
+.apprinter-range-popup-backdrop {
   position: fixed;
   z-index: 1000;
   inset: 0;
   background: rgba(223, 223, 223, 0.4);
 }
 
-.apph-range-popup {
+.apprinter-range-popup {
   position: fixed;
   z-index: 1001;
-  background: var(--apph-color-surface);
+  background: var(--apprinter-color-surface);
   border: none;
   border-radius: 14px;
-  padding: var(--apph-space-0-5x);
+  padding: var(--apprinter-space-0-5x);
   box-shadow: 0 0 20px rgba(127, 127, 127, 0.25);
   min-width: 340px;
   max-width: calc(100vw - 32px);
 }
 
-.apph-range-popup-form {
+.apprinter-range-popup-form {
   display: flex;
   flex-direction: column;
-  gap: var(--apph-space-0-5x);
+  gap: var(--apprinter-space-0-5x);
 }
 
-.apph-range-popup-row {
+.apprinter-range-popup-row {
   display: flex;
-  gap: var(--apph-space-0-5x);
+  gap: var(--apprinter-space-0-5x);
   margin: 0;
   padding: 0;
   border: none;
 }
 
-.apph-range-popup-row label {
+.apprinter-range-popup-row label {
   flex: 1 1 0;
   min-width: 0;
   display: flex;
   flex-direction: column;
-  gap: var(--apph-space-0-125x);
+  gap: var(--apprinter-space-0-125x);
   font-size: 0.85rem;
 }
 
-.apph-range-popup-row input {
+.apprinter-range-popup-row input {
   width: 100%;
 }
 
-.apph-range-popup-actions {
+.apprinter-range-popup-actions {
   display: flex;
-  gap: var(--apph-space-0-25x);
+  gap: var(--apprinter-space-0-25x);
   margin: 0;
-  padding: var(--apph-space-0-25x) 0 0;
+  padding: var(--apprinter-space-0-25x) 0 0;
   border: none;
 }
 
-.apph-range-popup-actions .apph-btn {
+.apprinter-range-popup-actions .apprinter-btn {
   flex: 1 1 0;
 }
 </style>

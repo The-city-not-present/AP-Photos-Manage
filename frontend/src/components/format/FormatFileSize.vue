@@ -34,7 +34,7 @@ const text = computed(() => formatNumberOfBytes(props.size))
 
 <template>
   <span
-    class="apph-format-filesize"
+    class="apprinter-format-filesize"
     :title="size != null && size !== '' ? `${size} bytes` : ''"
     :data-value="size"
   >{{ text }}</span>

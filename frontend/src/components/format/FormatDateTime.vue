@@ -34,5 +34,5 @@ const text = computed(() => {
 </script>
 
 <template>
-  <span class="apph-format-datetime">{{ text }}</span>
+  <span class="apprinter-format-datetime">{{ text }}</span>
 </template>

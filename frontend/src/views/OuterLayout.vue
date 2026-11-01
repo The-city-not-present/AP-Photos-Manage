@@ -11,42 +11,42 @@ const navLinks = [
 </script>
 
 <template>
-  <div class="apph-outer-layout">
+  <div class="apprinter-outer-layout">
     <AppHeader
-      title="App Photo Assistant"
+      title="Rabid Printer"
       subtitle="Manage and sort your photo library"
       visually-hidden
     />
     <AppNav :links="navLinks" />
 
-    <main class="apph-outer-layout-main">
+    <main class="apprinter-outer-layout-main">
       <ErrorBoundary>
         <RouterView />
       </ErrorBoundary>
     </main>
 
-    <footer class="apph-outer-layout-footer">
+    <footer class="apprinter-outer-layout-footer">
       <BackendStatus />
     </footer>
   </div>
 </template>
 
 <style scoped>
-.apph-outer-layout {
+.apprinter-outer-layout {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
 }
 
-.apph-outer-layout-main {
+.apprinter-outer-layout-main {
   flex: 1;
-  padding: var(--apph-space-0-5x) 0;
+  padding: var(--apprinter-space-0-5x) 0;
 }
 
-.apph-outer-layout-footer {
-  padding: var(--apph-space-0-5x) var(--apph-space);
-  border-top: 1px solid var(--apph-border-color);
-  color: var(--apph-color-muted);
+.apprinter-outer-layout-footer {
+  padding: var(--apprinter-space-0-5x) var(--apprinter-space);
+  border-top: 1px solid var(--apprinter-border-color);
+  color: var(--apprinter-color-muted);
   font-size: 0.85rem;
 }
 </style>

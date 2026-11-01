@@ -10,7 +10,7 @@ Filtering happens at two levels:
 1. **Which records are rendered** — the rendered list contains visible records
    plus records that were visible recently.
 2. **Which records are shown** — records in the list that currently don't match
-   are hidden with a CSS class (`.apph-u-hidden`), not destroyed.
+   are hidden with a CSS class (`.apprinter-u-hidden`), not destroyed.
 
 The point of level 2: while a user types quickly into a filter box, a record
 that briefly disappears and then reappears is **not unmounted/recreated** — it

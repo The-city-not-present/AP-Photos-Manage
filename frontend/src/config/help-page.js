@@ -2,9 +2,9 @@
 // and update without touching the component that renders it.
 
 export const helpPage = {
-  title: 'About App Photo Assistant',
+  title: 'About Rabid Printer',
   lede:
-    'A personal photo assistant for managing and sorting your photo library — the management side of tools like Lightroom (its Library module), ACDSee or Adobe Bridge: everything except pixel editing.',
+    'A personal photo manager for managing and sorting your photo library — the management side of tools like Lightroom (its Library module), ACDSee or Adobe Bridge: everything except pixel editing.',
   sections: [
     {
       title: 'What it does',

@@ -111,7 +111,7 @@ const view = computed(() => {
     } else {
       if (!m.prevIsHidden) m.lastHiddenAt = now
       if (m.wasEverShown && now - m.lastHiddenAt < HIDE_TTL_MS) {
-        out.push({ ...record, _filterMeta: { hidden: true, cssClasses: ['apph-u-hidden'] } })
+        out.push({ ...record, _filterMeta: { hidden: true, cssClasses: ['apprinter-u-hidden'] } })
       }
     }
   }
@@ -121,12 +121,12 @@ const view = computed(() => {
 </script>
 
 <template>
-  <div class="apph-records-filter">
-    <form class="apph-records-filter-form" @submit.prevent>
-      <div class="apph-records-filter-fields">
-        <label v-for="(def, key) in columnsSanitized" :key="key" class="apph-records-filter-field">
-          <span class="apph-records-filter-field-label">{{ def.label }}</span>
-          <apph-range-input
+  <div class="apprinter-records-filter">
+    <form class="apprinter-records-filter-form" @submit.prevent>
+      <div class="apprinter-records-filter-fields">
+        <label v-for="(def, key) in columnsSanitized" :key="key" class="apprinter-records-filter-field">
+          <span class="apprinter-records-filter-field-label">{{ def.label }}</span>
+          <apprinter-range-input
             v-if="isRangeType(def.type)"
             v-model="filters[key]"
             :kind="def.type"
@@ -138,33 +138,33 @@ const view = computed(() => {
             v-model="filters[key]"
             type="text"
             :name="'filter-' + key"
-            class="apph-form-control"
+            class="apprinter-form-control"
             :placeholder="'Filter ' + def.label.toLowerCase() + '…'"
           />
         </label>
       </div>
     </form>
 
-    <div class="apph-records-filter-toolbar">
-      <label class="apph-records-filter-sort">
+    <div class="apprinter-records-filter-toolbar">
+      <label class="apprinter-records-filter-sort">
         <span>Sort by</span>
-        <select v-model="sortingColumn" name="sort-column" class="apph-form-control">
+        <select v-model="sortingColumn" name="sort-column" class="apprinter-form-control">
           <option value="">not sorted</option>
           <option v-for="(def, key) in columnsSanitized" :key="key" :value="key">{{ def.label }}</option>
         </select>
-        <select v-model="sortingAscending" name="sort-order" class="apph-form-control">
+        <select v-model="sortingAscending" name="sort-order" class="apprinter-form-control">
           <option :value="true">ascending</option>
           <option :value="false">descending</option>
         </select>
       </label>
 
-      <div v-if="numPages > 1" class="apph-records-filter-pagination">
-        <span class="apph-records-filter-pagination-label">Page</span>
+      <div v-if="numPages > 1" class="apprinter-records-filter-pagination">
+        <span class="apprinter-records-filter-pagination-label">Page</span>
         <button
           v-for="n in numPages"
           :key="n"
           type="button"
-          class="apph-records-filter-page"
+          class="apprinter-records-filter-page"
           :class="{ 'is-active': n - 1 === page }"
           @click="selectPage(n - 1)"
         >
@@ -173,112 +173,112 @@ const view = computed(() => {
       </div>
     </div>
 
-    <div class="apph-records-filter-content">
+    <div class="apprinter-records-filter-content">
       <slot :records="view" />
     </div>
   </div>
 </template>
 
 <style scoped>
-.apph-records-filter {
+.apprinter-records-filter {
   container-type: inline-size;
   display: flex;
   flex-direction: column;
-  gap: var(--apph-space-0-5x);
+  gap: var(--apprinter-space-0-5x);
 }
 
-.apph-records-filter-fields {
+.apprinter-records-filter-fields {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--apph-space-0-25x) var(--apph-space-0-5x);
+  gap: var(--apprinter-space-0-25x) var(--apprinter-space-0-5x);
 }
 
-.apph-records-filter-field {
+.apprinter-records-filter-field {
   display: flex;
   flex-direction: column;
-  gap: var(--apph-space-0-125x);
+  gap: var(--apprinter-space-0-125x);
   min-width: 0;
   /* Fixed box width: on wide containers boxes flow naturally and wrap,
      leaving a ragged right edge instead of stretching to fill. */
   flex: 0 0 200px;
 }
 
-.apph-records-filter-field-label {
+.apprinter-records-filter-field-label {
   font-size: 0.85rem;
   font-weight: 600;
-  color: var(--apph-color-muted);
+  color: var(--apprinter-color-muted);
 }
 
-.apph-records-filter-field input {
+.apprinter-records-filter-field input {
   width: 100%;
 }
 
 /* ~3 boxes fit → 33% each (fills the row, aligned to the right edge). */
 @container (max-width: 840px) {
-  .apph-records-filter-field {
+  .apprinter-records-filter-field {
     flex: 1 1 calc(33.333% - 10px);
   }
 }
 
 /* ~2 boxes fit → 50% each. */
 @container (max-width: 620px) {
-  .apph-records-filter-field {
+  .apprinter-records-filter-field {
     flex: 1 1 calc(50% - 7.5px);
   }
 }
 
 /* Not even 2 boxes fit → full width. */
 @container (max-width: 420px) {
-  .apph-records-filter-field {
+  .apprinter-records-filter-field {
     flex: 1 1 100%;
   }
 }
 
-.apph-records-filter-toolbar {
+.apprinter-records-filter-toolbar {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: var(--apph-space-0-5x) var(--apph-space-0-75x);
+  gap: var(--apprinter-space-0-5x) var(--apprinter-space-0-75x);
 }
 
-.apph-records-filter-sort {
+.apprinter-records-filter-sort {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: var(--apph-space-0-25x);
+  gap: var(--apprinter-space-0-25x);
 }
 
-.apph-records-filter-pagination {
+.apprinter-records-filter-pagination {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: var(--apph-space-0-25x);
+  gap: var(--apprinter-space-0-25x);
 }
 
-.apph-records-filter-pagination-label {
+.apprinter-records-filter-pagination-label {
   font-size: 0.85rem;
-  color: var(--apph-color-muted);
+  color: var(--apprinter-color-muted);
 }
 
-.apph-records-filter-page {
+.apprinter-records-filter-page {
   min-width: 28px;
   height: 28px;
-  padding: 0 var(--apph-space-0-25x);
-  border: 1px solid var(--apph-border-color);
-  border-radius: var(--apph-border-radius);
-  background: var(--apph-color-surface);
-  color: var(--apph-color-text);
+  padding: 0 var(--apprinter-space-0-25x);
+  border: 1px solid var(--apprinter-border-color);
+  border-radius: var(--apprinter-border-radius);
+  background: var(--apprinter-color-surface);
+  color: var(--apprinter-color-text);
   cursor: pointer;
   font: inherit;
 }
 
-.apph-records-filter-page:hover {
-  border-color: var(--apph-border-color-dark);
+.apprinter-records-filter-page:hover {
+  border-color: var(--apprinter-border-color-dark);
 }
 
-.apph-records-filter-page.is-active {
-  border-color: var(--apph-color-primary);
+.apprinter-records-filter-page.is-active {
+  border-color: var(--apprinter-color-primary);
   border-width: 3px;
-  padding: 0 calc(var(--apph-space-0-25x) - 2px);
+  padding: 0 calc(var(--apprinter-space-0-25x) - 2px);
 }
 </style>

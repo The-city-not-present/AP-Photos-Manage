@@ -10,9 +10,11 @@
 - Aligned `.clinerules/00-project-context.md` with the `apqa` project-context
   pattern and added `.clinerules/00-non-interactive-terminal-commands.md` as a
   fallback rule for Git pager issues.
-- Project name is currently inconsistent across the repo: git remote
-  `AP-Photos-Manage`, directory/package `apphotoassistant`, README/UI title
-  "App Photo Assistant", backend env var `APP_PHOTO_ASSISTANT_LIBRARY`.
+- Project renamed to **Rabid Printer** (from Russian «Бешеный принтер»). All
+  user-facing names, the package name (`rabid-printer-frontend`), the backend
+  env var (`RABID_PRINTER_LIBRARY`), the data dir (`~/.rabid-printer`) and the
+  CSS brand token (`apprinter-`) were updated. Rationale and rejected
+  suggestions: `docs/project-name.md`.
 - Reviewed date handling in the reusable filtering component
   (`frontend/src/components/records-filter/`) and fixed date/datetime range
   comparisons.
@@ -33,10 +35,11 @@
 - The matcher (`matchers.js`) already compared epoch ms via `getTime()`, not raw
   `>=`/`<=` on strings, but it still normalized each side with `new Date(...)`
   independently, so the ambiguity above leaked in.
-- The project name lives in several places: `README.md`, `frontend/index.html`,
+- The project name was spread across `README.md`, `frontend/index.html`,
   `frontend/src/views/OuterLayout.vue`, `frontend/src/config/help-page.js`,
-  `frontend/package.json` (+ `package-lock.json`), `backend/app/config.py` and
-  `backend/app/__init__.py`.
+  `frontend/package.json` (+ `package-lock.json`), `backend/app/config.py`,
+  `backend/app/__init__.py` and the CSS brand token `apph-`; all were updated in
+  the rename to "Rabid Printer".
 
 ## Decisions & reasoning
 
@@ -52,7 +55,7 @@
 
 ## Open questions
 
-- What should the project be named? See `docs/roadmap.md`. The name should be a
-  general "manage / housekeep" word covering photos and possibly all files, easy
-  for non-native English speakers; prior AI suggestions were rejected.
+- The name is decided (**Rabid Printer**); rationale in `docs/project-name.md`.
+  The GitHub repo (`AP-Photos-Manage`) and the local directory
+  (`apphotoassistant/`) are intentionally left unchanged for now.
 
